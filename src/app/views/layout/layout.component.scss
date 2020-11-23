@@ -1,0 +1,37 @@
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+//   height: 100%;
+//   width: 100%;
+//   opacity: 1;
+//   background-color: rgba(32, 31, 31, 0.7);
+//   z-index: 99;
+}
+
+.parent {
+  overflow: hidden auto;
+  width: 100%;
+  height: calc(100vh - 44px);
+}
+.child1  {
+  width: 33%;
+  height: 100%;
+  border: 2px solid black;
+  float: left;
+  overflow: hidden auto;
+}
+.child2  {
+  width: 23%;
+  height: 100%;
+  border: 2px solid black;
+  float: left;
+  overflow: hidden auto;
+}
+.child3  {
+  width: 33%;
+  height: 100%;
+  border: 2px solid black;
+  float: left;
+  overflow: hidden auto;
+}

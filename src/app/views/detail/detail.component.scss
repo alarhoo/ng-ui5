@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  height: 44px;
+  background-color: blue;
+}
+
+.parent {
+  overflow: hidden;
+  width: 100%;
+  height: calc(100vh - 44px);
+}
+
+.child {
+  width: 100%;
+  height: 100%;
+  overflow: hidden auto;
+}
+
+.midColumn {
+  width: 23%;
+  height: 100%;
+  border: 2px solid black;
+  float: left;
+  overflow: hidden auto;
+}
+
+.endColumn {
+  width: 33%;
+  height: 100%;
+  border: 2px solid black;
+  float: left;
+  overflow: hidden auto;
+}

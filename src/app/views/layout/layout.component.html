@@ -1,0 +1,226 @@
+<div fxLayout="column" fxFlexFill>
+  <!-- Header style="position: fixed; top: 0px; z-index: 1000" -->
+  <div fxLayout="row">
+    <ui5-shellbar fxFlexFill primary-title="UI5 Web Components" secondary-title="In Angular App" show-co-pilot
+      notification-count="99+" show-notifications show-product-switch (profile-click)="openProfilePopover($event)">
+      <ui5-button icon="menu" slot="startButton" id="startButton" (click)="sideNaveToggle()"></ui5-button>
+      <img slot="logo" src="../../../assets/img/logo.png" />
+
+      <ui5-input slot="searchField"></ui5-input>
+      <ui5-avatar slot="profile" image="../../../assets/img/michael.jpg" title="Michael Scott">
+      </ui5-avatar>
+      <ui5-shellbar-item icon="sap-icon://refresh" text="Refresh" title="Refresh"></ui5-shellbar-item>
+      <ui5-shellbar-item icon="sap-icon://incoming-call" text="Incoming Calls" count="4"></ui5-shellbar-item>
+    </ui5-shellbar>
+    <ui5-popover #popover placement-type="Bottom">
+      <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <ui5-avatar fxFlex image="../../../assets/img/michael.jpg" size="L"></ui5-avatar>
+        <ui5-title fxFlex>Michael Scott</ui5-title>
+        <ui5-title level="H6">Regional Manager</ui5-title>
+        <ui5-link fxFlex href="mailto:michael.scott@utegration.com">michael.scott@utegration.com</ui5-link>
+      </div>
+      <div style="padding-top: 5px;"></div>
+      <ui5-list separators="None">
+        <ui5-li icon="settings" (click)="openSettings()">Settings</ui5-li>
+        <ui5-li icon="sys-help">Help</ui5-li>
+        <ui5-li icon="log">Sign out</ui5-li>
+      </ui5-list>
+    </ui5-popover>
+
+    <ui5-dialog #settingsDialog header-text="Settings">
+      <section class="login-form">
+        <table>
+          <tr>
+            <td>
+              <ui5-label for="theme" required>Dark Theme: </ui5-label>
+            </td>
+            <td style="padding-left: 10px;">
+              <ui5-switch #darkThemeChecked graphical checked></ui5-switch>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ui5-label for="lang" required>Languages: </ui5-label>
+            </td>
+            <td>
+              <div>
+                <ui5-radiobutton text="English" value="en" selected name="lang"></ui5-radiobutton>
+                <ui5-radiobutton text="ಕನ್ನಡ" value="kn" name="lang"></ui5-radiobutton>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <div slot="footer" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center" fxFill style="padding: 10px;">
+        <!-- <div style="flex: 1;"></div> -->
+        <ui5-button FxFlex design="Positive" icon="save" (click)="saveSettings()">Save</ui5-button>
+        <ui5-button FxFlex design="Negative" icon="decline" (click)="closeSettings()">Close</ui5-button>
+      </div>
+    </ui5-dialog>
+  </div>
+  <div fxLayout="row" class="parent">
+    <aside>
+      <ui5-side-navigation #snav (selection-change)="sideNavigationChange($event)" collapsed="true">
+        <ui5-side-navigation-item text="Summary" icon="overview-chart" [routerLink]="['/summary']" title="Summary">
+        </ui5-side-navigation-item>
+        <ui5-side-navigation-item text="Detail" icon="detail-view" [routerLink]="'/detail'">
+        </ui5-side-navigation-item>
+
+        <ui5-side-navigation-item slot="fixedItems" text="Useful Links" icon="chain-link" title="Links">
+        </ui5-side-navigation-item>
+        <ui5-side-navigation-item slot="fixedItems" text="About" icon="information" title="About">
+        </ui5-side-navigation-item>
+      </ui5-side-navigation>
+    </aside>
+    <div style="width: 100%; overflow: hidden auto;">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- <div style="width: 100%; overflow: hidden auto;">
+      <ui5-flexible-column-layout #fcl style="height: 100%;">
+        <div slot="startColumn">
+          <p (click)="openMidColumn()">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+            galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+            also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+            publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+        </div>
+      </ui5-flexible-column-layout>
+    </div> -->
+  </div>
+  <ui5-dialog #aboutDialog header-text="About">
+    <section>
+      <table>
+        <tr>
+          <td>
+            <ui5-label for="theme" required>Dark Theme: </ui5-label>
+          </td>
+          <td style="padding-left: 10px;">
+            <ui5-switch #darkThemeChecked graphical checked></ui5-switch>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ui5-label for="lang" required>Languages: </ui5-label>
+          </td>
+          <td>
+            <div>
+              <ui5-radiobutton text="English" value="en" selected name="lang"></ui5-radiobutton>
+              <ui5-radiobutton text="ಕನ್ನಡ" value="kn" name="lang"></ui5-radiobutton>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <div slot="footer" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center" fxFill style="padding: 10px;">
+      <!-- <div style="flex: 1;"></div> -->
+      <ui5-button FxFlex design="Positive" icon="save" (click)="saveSettings()">Save</ui5-button>
+      <ui5-button FxFlex design="Negative" icon="decline" (click)="closeSettings()">Close</ui5-button>
+    </div>
+  </ui5-dialog>
+</div>

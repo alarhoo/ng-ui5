@@ -1,0 +1,54 @@
+<ui5-flexible-column-layout fxFlex>
+  <div slot="startColumn">
+
+    <!-- Filters -->
+    <form fxLayout="column" fxLayoutGap="15px" style="padding: 20px;">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxLayoutAlign="space-around stretch">
+        <ui5-select #selectCountry fxFlex class="select" (change)="changeCountry($event)" style="width: 100%;">
+          <ui5-option *ngFor="let country of countries" icon="world" value="{{country.Slug}}">{{country.Country}}
+          </ui5-option>
+        </ui5-select>
+        <ui5-daterange-picker fxFlex [minDate]="minDate" [maxDate]="maxDate" [value]="selectedDateRange"
+          format-pattern="MM/dd/yyyy" placeholder="Enter Date Range" (change)="changeDateRange($event)"
+          hide-week-numbers="true"></ui5-daterange-picker>
+        <ui5-segmentedbutton fxHide.lt-md="true">
+          <ui5-togglebutton title="All">All</ui5-togglebutton>
+          <ui5-togglebutton pressed>Last 30 days</ui5-togglebutton>
+          <ui5-togglebutton>Last 7 days</ui5-togglebutton>
+        </ui5-segmentedbutton>
+      </div>
+      <ui5-label wrap="true">Showing Data for {{selectedCountry | titlecase}} from {{ selectedMinDate | date}} -
+        {{ selectedMaxDate | date}}</ui5-label>
+    </form>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-evenly stretch"
+      style="padding: 0px 10px 10px 10px;">
+      <ui5-card fxFlex style="padding: 10px 10px;" *ngFor="let data of oKPIData" heading="{{data.title}}"
+        fxLayout.lt-sm="column" subheading="{{data.value | number}}" class="small">
+        <ui5-icon name="{{data.icon}}" slot="avatar"></ui5-icon>
+      </ui5-card>
+      <ui5-card fxFlex style="padding: 10px 10px;" *ngIf="oKPIData.length === 0"
+        heading="No data available for the selected criteria!" fxLayout.lt-sm="column"
+        subheading="Please change the filters and try again!">
+        <ui5-icon name="cancel" slot="avatar"></ui5-icon>
+      </ui5-card>
+    </div>
+
+    <!-- Graphs -->
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <div fxFlex style="padding: 20px;">
+        <ui5-card fxFlexAlign="center" heading="Cases by Country - {{selectedCountry | titlecase}}"
+          subheading="{{selectedCountry | titlecase}}">
+          <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <apx-chart fxFlex fxFlexFill style="padding-right: 20px;" [series]="chartOptions.series"
+              [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke"
+              [colors]="chartOptions.colors" [dataLabels]="chartOptions.dataLabels" [legend]="chartOptions.legend"
+              [markers]="chartOptions.markers" [grid]="chartOptions.grid" [yaxis]="chartOptions.yaxis"
+              [title]="chartOptions.title" [theme]="chartOptions.theme" [noData]="chartOptions.noData"></apx-chart>
+          </div>
+        </ui5-card>
+      </div>
+    </div>
+
+  </div>
+</ui5-flexible-column-layout>
